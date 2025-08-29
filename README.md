@@ -1,3 +1,15 @@
+
+___
+
+# Warwick McNaughton's fork of Belenios
+
+This fork adds files suitable for creating a squashfs image on a Fedora Linux system under contrib/fedora.
+
+I have put together more detail about this and about deploying to AWS here: https://wrmack.github.io/belenios-server-notes/
+
+___
+
+
 Belenios
 ========
 
