@@ -1,7 +1,9 @@
 Deploying Belenios using systemd-nspawn
 =======================================
 
-This file contains the same information as contrib/nspawn/README.md but amended for use on a Fedora workstation and using podman instead of docker.
+This file contains the same information as contrib/nspawn/README.md but amended for use on a Fedora workstation and using podman instead of docker. 
+
+See [Warwick McNaughton's notes](https://wrmack.github.io/belenios-server-notes/) on deploying Belenios to Amazon AWS for more detail.
 
 
 Introduction
