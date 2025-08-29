@@ -4,6 +4,7 @@
 *.dvi
 *.rubbercache
 *.install
+.env_secrets
 _build
 _build-debug
 _releases
