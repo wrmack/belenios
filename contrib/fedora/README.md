@@ -115,7 +115,7 @@ to see if the unit is running and debug it if needed. You can also use
 `journalctl` or read Belenios-specific logs in `/var/belenios/log`.
 
 
-### Mails are not delivered
+### Emails are not delivered
 
 Be sure the MTA on the host works properly. Its logs can be helpful in
 debugging mail delivery problems.
@@ -123,49 +123,3 @@ debugging mail delivery problems.
 Usually, the `return-path` setting in `ocsigenserver.conf.in` must be
 set to a valid e-mail address.
 
-
-cat > /etc/msmtprc <<XOF
-defaults
-tls on
-tls_starttls on
-tls_trust_file /etc/ssl/certs/ca-certificates.crt
-syslog on
-
-account ses
-host email-smtp.us-east-1.amazonaws.com
-port 587
-auth on
-user AKIA3BQFZYK6ZWIIXT7P
-password BJxphimKySkSFomd5GdhbEYR3yD2cE3IdKRJ8OSmdfPm
-from elections@wrmack.com
-
-account default : ses
-# from %U@belenios
-syslog LOG_MAIL
-XOF
-
-[ec2-user@ip-172-31-30-217 ~]$ ls -al /etc/resolv.conf
-lrwxrwxrwx. 1 root root 32 Jul 30  2024 /etc/resolv.conf -> /run/systemd/resolve/resolv.conf
-
-[ec2-user@ip-172-31-30-217 ~]$ cat /run/systemd/resolve/resolv.conf
-# This is /run/systemd/resolve/resolv.conf managed by man:systemd-resolved(8).
-# Do not edit.
-#
-# This file might be symlinked as /etc/resolv.conf. If you're looking at
-# /etc/resolv.conf and seeing this text, you have followed the symlink.
-#
-# This is a dynamic resolv.conf file for connecting local clients directly to
-# all known uplink DNS servers. This file lists all configured search domains.
-#
-# Third party programs should typically not access this file directly, but only
-# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
-# different way, replace this symlink by a static file or a different symlink.
-#
-# See man:systemd-resolved.service(8) for details about the supported modes of
-# operation for /etc/resolv.conf.
-
-nameserver 172.31.0.2
-search ec2.internal
-
-MACHINE       CLASS     SERVICE        OS     VERSION ADDRESSES
-belenios-main container systemd-nspawn debian 13      -
