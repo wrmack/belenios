@@ -2,6 +2,7 @@
 
 set -e
 
+
 if [ "$1" = "--preload" ]; then
     shift
     . "$1"
@@ -14,12 +15,14 @@ if [ -e .git ]; then
     : ${BELENIOS_RUNDIR:=/tmp/belenios}
     : ${BELENIOS_BINDIR:=_run/usr/bin}
     : ${BELENIOS_SHAREDIR:=_run/usr/share/belenios-server}
+    : ${BELENIOS_SECRETS:=demo/.env_secrets.sh}
 else
     : ${BELENIOS_CONFIG:=/etc/belenios/ocsigenserver.conf.in}
     : ${BELENIOS_VARDIR:=/var/belenios}
     : ${BELENIOS_RUNDIR:=/run/belenios}
     : ${BELENIOS_BINDIR:=/usr/bin}
     : ${BELENIOS_SHAREDIR:=/usr/share/belenios-server}
+    : ${BELENIOS_SECRETS:=/etc/belenios/.env_secrets.sh}
 fi
 
 check_nonempty_var () {
@@ -55,10 +58,17 @@ fi
 
 touch $BELENIOS_VARDIR/password_db.csv
 
+# Load Google clientid and clientsecret from .env_secrets.sh
+source $BELENIOS_SECRETS
+BELENIOS_CLIENTID=$CLIENTID
+BELENIOS_CLIENTSECRET=$CLIENTSECRET
+
 sed \
     -e "s@_VARDIR_@$BELENIOS_VARDIR@g" \
     -e "s@_RUNDIR_@$BELENIOS_RUNDIR@g" \
     -e "s@_SHAREDIR_@$BELENIOS_SHAREDIR@g" \
+    -e "s@_CLIENTID_@$BELENIOS_CLIENTID@g" \
+    -e "s@_CLIENTSECRET_@$BELENIOS_CLIENTSECRET@g" \
     $BELENIOS_CONFIG > $BELENIOS_VARDIR/etc/ocsigenserver.conf
 
 PATH=$BELENIOS_BINDIR:$PATH:/usr/sbin

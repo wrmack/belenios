@@ -20,3 +20,7 @@ env.sh
 node_modules
 *.stories.mjs
 scaling.*.json
+demo/ocsigenserver.conf.in
+demo/.env_secrets.sh
+.env_secrets.sh
+contrib/fedora/.env_secrets_SES.sh

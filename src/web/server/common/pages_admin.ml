@@ -168,7 +168,7 @@ struct
               (fun { auth_instance = service; _ } ->
                 div
                   [
-                    txt (s_ "You can also log in with");
+                    txt (s_ "Log in with");
                     txt " ";
                     a ~service:site_login
                       [ txt service ]
