@@ -10,6 +10,11 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
+echo "PWD: $PWD"
+. contrib/fedora/.env_secrets_SES.sh
+echo "SESUSER: $SESUSER"
+
+
 BELENIOS_SERVER_DEB="$1"
 BELENIOS_SERVER_BUILDINFO="${BELENIOS_SERVER_DEB%.deb}.buildinfo"
 TARGET="$2"
@@ -74,8 +79,8 @@ account ses
 host email-smtp.us-east-1.amazonaws.com
 port 587
 auth on
-user ***********                 # SES user from SES-SMTP settings-Create SMTP credentials 
-password **********              # SES user password
+user $SESUSER
+password $SESPASSWORD
 from elections@wrmack.com
 
 account default : ses
@@ -89,6 +94,7 @@ dpkg-query -W -f=',\n \${binary:Package} (= \${Version})' | tail -n +2 >> \$SBOM
 echo >> \$SBOM
 chown root:root -R /usr/share/belenios-server/sbom
 EOF
+
 chmod +x "$TMP/postinst.sh"
 
 mmdebstrap --variant=essential \
@@ -108,6 +114,3 @@ mmdebstrap --variant=essential \
   --customize-hook='chroot "$1" rm /tmp/postinst.sh' \
   --customize-hook='chroot "$1" rm -rf '"$TMP" \
   "$STABLE_SUITE" "$TARGET" "$TMP/sources.list"
-
-
-

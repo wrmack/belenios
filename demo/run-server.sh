@@ -59,7 +59,7 @@ fi
 touch $BELENIOS_VARDIR/password_db.csv
 
 # Load Google clientid and clientsecret from .env_secrets.sh
-source $BELENIOS_SECRETS
+. $BELENIOS_SECRETS
 BELENIOS_CLIENTID=$CLIENTID
 BELENIOS_CLIENTSECRET=$CLIENTSECRET
 
