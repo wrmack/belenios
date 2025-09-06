@@ -5,7 +5,7 @@ ___
 
 This fork adds files suitable for creating a squashfs image on a Fedora Linux system under contrib/fedora.
 
-I have put together more detail about this and about deploying to AWS here: https://wrmack.github.io/belenios-server-notes/
+I have put together more detail about this and about deploying to AWS here: [https://wrmack.github.io/mkdocs-gh-belenios/](https://wrmack.github.io/mkdocs-gh-belenios/)
 
 ## Secrets are stored in environmental variables
 
