@@ -7,6 +7,24 @@ This fork adds files suitable for creating a squashfs image on a Fedora Linux sy
 
 I have put together more detail about this and about deploying to AWS here: https://wrmack.github.io/belenios-server-notes/
 
+## Secrets are stored in environmental variables
+
+Passwords are stored in environmental variables and for security reasons are not pushed to the Github repository. However they are required by the way that I have configured Belenios.
+
+For Google OIDC (sign in with Google) to work, `ocsigenserver.conf.in` used by demo/run-server.sh requires substitution of the varilables _CLIENTID_ and _CLIENTSECRET_ by reading them in from a file`.env_secrets.sh` in the same directory. That file should have:
+
+```bash
+CLIENTID="<your google clientid>"
+CLIENTSECRET="<your google client secret>"  
+```
+
+The `msmtprc` configuration file created by contrib/fedora/make-squashfs.sh requires the AWS SES user and password to be stored in a file `.env_secrets_SES.sh` in the same directory. That file should have:
+
+```bash
+SESUSER="<your AWS SES username>"
+SESPASSWORD="<your AWS SES user password>"
+```
+
 ___
 
 
